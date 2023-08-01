@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
         speed = 0;
 
 
-        if(targetIndex <4)
+        if(targetIndex <6)
         {
             dir = target[targetIndex].position - this.transform.position;
             dir = dir.normalized * 0.03f;
@@ -50,9 +50,9 @@ public class Enemy : MonoBehaviour
             if(Vector2.Distance(this.transform.position,target[targetIndex].position) < 0.02f)
             {
                 targetIndex += 1;
-                if(targetIndex == 4 )
+                if(targetIndex == 6 )
                 {
-                    targetIndex = 0;
+                    targetIndex = 1;
                 }
             }
         }
