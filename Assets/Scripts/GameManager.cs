@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     public GameObject buttons;
     public Transform ground;
 
+    public Transform enemys;
+
 
     public float time =0;
     public float timeMax = 2f;
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
                 GameObject temp = Instantiate(enemy01[enemyData[1,count]]);
                 temp.transform.position = startPos.position;
                 temp.GetComponent<Enemy>().target = target;
+                temp.transform.parent = enemys;
 
                 time = timeMax;
                 count++;
@@ -72,8 +75,9 @@ public class GameManager : MonoBehaviour
         if(ground.childCount == 0)
         {
               GameObject temp = Instantiate(towers[index]);
-        temp.transform.parent = ground;
-        temp.transform.localPosition = Vector3.zero;
+                temp.transform.parent = ground;
+                temp.transform.localPosition = Vector3.zero;
+                temp.GetComponent<Tower>().gm = this;
 
         }
      

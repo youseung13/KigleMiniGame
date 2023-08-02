@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 324629290898843955}
   - component: {fileID: 6390869102039394385}
   - component: {fileID: 547288840699335292}
+  - component: {fileID: -4409971410096602201}
   m_Layer: 0
   m_Name: pl_ninja
   m_TagString: Untagged
@@ -93,7 +94,7 @@ Animator:
   m_GameObject: {fileID: 4662627087018034237}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2c6a5d6e70cdc504c815a9dea7c2fb24, type: 2}
+  m_Controller: {fileID: 22100000, guid: de42f3456f3b8b54a8f518e248b82b66, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -102,3 +103,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-4409971410096602201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4662627087018034237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d501c1f4eee8f4582d7e70ebe30bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 2
+  delayMax: 2
+  range: 3.5
+  ani: {fileID: 547288840699335292}
+  gm: {fileID: 0}
+  target: {fileID: 0}
+  minDistance: 9999
+  bullet: {fileID: 1878664828851887621, guid: d856bdeb427b6a04ab72056bf70ee1ac, type: 3}

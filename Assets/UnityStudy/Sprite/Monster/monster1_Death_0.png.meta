@@ -3,7 +3,7 @@ guid: abb7a833b7c4d02469d93b12e13e1782
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -23,8 +23,6 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
-  vTOnly: 0
-  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -56,14 +54,10 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
-  flipbookRows: 1
-  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
-  ignorePngGamma: 0
   applyGammaDecoding: 0
-  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -121,11 +115,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 27
-        y: 791
-        width: 152
-        height: 135
+        y: 779
+        width: 180
+        height: 180
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -141,12 +135,12 @@ TextureImporter:
       name: monster1_Death_0_1
       rect:
         serializedVersion: 2
-        x: 282
-        y: 792
-        width: 149
-        height: 147
+        x: 289
+        y: 781
+        width: 180
+        height: 180
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -162,12 +156,12 @@ TextureImporter:
       name: monster1_Death_0_2
       rect:
         serializedVersion: 2
-        x: 540
-        y: 795
-        width: 151
-        height: 160
+        x: 542
+        y: 782
+        width: 180
+        height: 180
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -183,12 +177,12 @@ TextureImporter:
       name: monster1_Death_0_3
       rect:
         serializedVersion: 2
-        x: 838
-        y: 784
-        width: 129
-        height: 168
+        x: 817
+        y: 781
+        width: 180
+        height: 180
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -209,7 +203,7 @@ TextureImporter:
         width: 155
         height: 113
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -230,7 +224,7 @@ TextureImporter:
         width: 170
         height: 104
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -252,14 +246,6 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      monster1_Death_0_4: -1383993183
-      monster1_Death_0_0: -1993962744
-      monster1_Death_0_3: -402682051
-      monster1_Death_0_1: -678040696
-      monster1_Death_0_2: 164059053
-      monster1_Death_0_6: -73813237
-      monster1_Death_0_5: 357982694
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
