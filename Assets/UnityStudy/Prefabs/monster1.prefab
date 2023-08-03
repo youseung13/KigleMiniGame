@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 7850301635651716250}
   - component: {fileID: 4024238719707557810}
   - component: {fileID: 7850301635651716249}
-  m_Layer: 0
+  - component: {fileID: 4410280363852583931}
+  - component: {fileID: 7298519940091714927}
+  m_Layer: 8
   m_Name: monster1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +103,11 @@ MonoBehaviour:
   targetIndex: 0
   ani: {fileID: 7850301635651716249}
   speed: 2
+  hp: 12
+  maxhp: 0
+  isDead: 0
   sprite: {fileID: 7850301635651716250}
+  cr: {fileID: 0}
 --- !u!95 &7850301635651716249
 Animator:
   serializedVersion: 3
@@ -121,3 +127,40 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!70 &4410280363852583931
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7850301635651716248}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.23, y: 0}
+  m_Size: {x: 0.78, y: 1.1333333}
+  m_Direction: 0
+--- !u!50 &7298519940091714927
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7850301635651716248}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

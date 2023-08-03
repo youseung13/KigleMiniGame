@@ -27,7 +27,7 @@ public class Tower : MonoBehaviour
 
     if(delay<0 && target != null)
     {
-      Debug.Log("공격!");
+     // Debug.Log("공격!");
       delay = delayMax;
       ani.SetTrigger("attack");
 
