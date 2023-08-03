@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &212873289
 Transform:
   m_ObjectHideFlags: 0
@@ -1428,7 +1428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &618314701
 Transform:
   m_ObjectHideFlags: 0
@@ -2231,12 +2231,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 798262fcc445af14a85766abc3333f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy01:
-  - {fileID: 7850301635651716248, guid: 2223da5c46467314095367c3e58e1e95, type: 3}
-  - {fileID: 5621832085382025769, guid: c4cb1b14bc7c5d643801ca8a006b6ff8, type: 3}
-  - {fileID: 337708572471748553, guid: c422cc71892eadf4480fdb0f9d6a34a5, type: 3}
-  - {fileID: 4980459414543751793, guid: 9e15ab665054aa44b87bfa3f5e608d7f, type: 3}
-  - {fileID: 2634466597034195262, guid: 43d5a7881d26f1b40832e111befe870e, type: 3}
+  level: 0
+  Maxlevel: 0
+  levelData: 
+  enemies: []
+  maxEnemy: 
+  enemyprefab: []
   towers:
   - {fileID: 2343384871730763362, guid: 6661595d4eb79c844919d8468c18aa1f, type: 3}
   - {fileID: 5677225258550470031, guid: a57ff66fd46cad54b93ddd175ba4da9f, type: 3}
@@ -2253,7 +2253,7 @@ MonoBehaviour:
   ground: {fileID: 0}
   enemys: {fileID: 923765942}
   time: 0
-  timeMax: 2
+  timeBetweenSpawn: 2
   count: 0
 --- !u!1 &1210631176
 GameObject:
@@ -2302,7 +2302,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1219553515
 Transform:
   m_ObjectHideFlags: 0
@@ -2866,7 +2866,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1567350562
 Transform:
   m_ObjectHideFlags: 0
