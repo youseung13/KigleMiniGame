@@ -98,13 +98,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05e72040bed202a4aa954649ee2032ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lap: 0
   target: []
-  dir: {x: 0, y: 0, z: 0}
-  targetIndex: 0
-  ani: {fileID: 7850301635651716249}
-  speed: 2
+  speed: 1.5
   hp: 12
   maxhp: 0
+  givecoin: 1
   isDead: 0
   sprite: {fileID: 7850301635651716250}
   cr: {fileID: 0}

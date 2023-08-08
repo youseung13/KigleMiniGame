@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-  public float delay = 2f;
+  public float delayTimer;
 
-  public float delayMax = 2;
+  public float delayMax;
 
-  public float range = 2;
+  public float range ;
+
+  public int cost;
 
   public Animator ani;
 
@@ -23,12 +25,12 @@ public class Tower : MonoBehaviour
   private void Update()
   {
     
-    delay -= Time.deltaTime;
+    delayTimer -= Time.deltaTime;
 
-    if(delay<0 && target != null)
+    if(delayTimer<0 && target != null)
     {
      // Debug.Log("공격!");
-      delay = delayMax;
+      delayTimer = delayMax;
       ani.SetTrigger("attack");
 
       GameObject temp = Instantiate(bullet);

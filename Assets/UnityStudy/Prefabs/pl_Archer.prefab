@@ -115,9 +115,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d501c1f4eee8f4582d7e70ebe30bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 2
-  delayMax: 2
-  range: 3.5
+  delayTimer: 0
+  delayMax: 1
+  range: 4
+  cost: 10
   ani: {fileID: 2343384871730763361}
   gm: {fileID: 0}
   target: {fileID: 0}

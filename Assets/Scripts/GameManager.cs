@@ -84,17 +84,25 @@ public class GameManager : MonoBehaviour
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Info")]
+    public List<GameObject> aliveenemy;
+    public int count;
+    public int coin;
+    public int life;
+
+
+
     public static GameManager instance;
 
     public bool isPause;
 
-    public int level ;
-     public int Maxlevel;
-    public int nowwave ;
+    private int level ;
+    private int Maxlevel;
+    private int nowwave ;
 
-    public List<GameObject> aliveenemy;
 
-    public SpawnData[] data;
+
+    [SerializeField] private SpawnData[] data;
 
     //생성할 프리팹
     public GameObject[] enemyprefab;
@@ -116,16 +124,16 @@ public class GameManager : MonoBehaviour
     public float timeBetweenSpawn ;
     public bool initspawn = false;
 
-    public int count;
 
-
+    public Text CoinText;
     public Text lvText;
     public Text countText;
+    public Text LifeText;
     // Start is called before the first frame update
 
     private void Awake() 
     {
-       timeBetweenSpawn = 1.3f;
+       timeBetweenSpawn = 0.35f;
         
     }
     void Start()
@@ -133,6 +141,8 @@ public class GameManager : MonoBehaviour
         instance = this;
         level = 1;
         nowwave = 0;
+        coin = 30;
+        life = 5;
 
         Debug.Log("data  1 = " + data[0].level + "/" + data[0].MaxEnemy + "/" + data[0].MaxIndex  +"/" + data[0].wave );
         Debug.Log("data  2 = " + data[1].level + "/" + data[1].MaxEnemy + "/" + data[1].MaxIndex  +"/" + data[1].wave );
@@ -144,6 +154,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(life <=0)
+        {
+            Debug.Log("game over!");
+            Pausebutton.gameObject.SetActive(true);
+            Time.timeScale=0;
+        }
 
 
 
@@ -153,6 +169,10 @@ public class GameManager : MonoBehaviour
       if(time >= timeBetweenSpawn && count < data[level-1].MaxEnemy && nowwave <data[level-1].wave && !isPause) 
             {
                 time =0;
+
+                if(level == 5)
+                BossSpawn();
+                else
                 DoSpawn();
             }
 
@@ -176,18 +196,33 @@ public class GameManager : MonoBehaviour
             Time.timeScale=0;
         }
 
-
+        CoinText.text = string.Format("{0:F0}", coin);
 
         lvText.text = string.Format("lv : {0:F0}", level);
         
         countText.text = string.Format("{0:F0}", aliveenemy.Count);
 
+        LifeText.text = string.Format("{0:F0}", life);
+
 
    
     }
-    
+
+    private void BossSpawn()
+    {
+        GameObject boss = Instantiate(enemyprefab[5]);
+        boss.transform.position = startPos.position;
+        boss.GetComponent<Enemy>().target = target;
+        boss.transform.parent = enemys;
+        count ++;
+        aliveenemy.Add(boss);
+    }
+
     public void DoSpawn()
     {
+       
+     
+      
         GameObject temp = Instantiate(enemyprefab[Random.Range(0,data[level-1].MaxIndex+1)]);
         temp.transform.position = startPos.position;
         temp.GetComponent<Enemy>().target = target;
@@ -210,8 +245,9 @@ public class GameManager : MonoBehaviour
 
     public void CreateTower(int index)
     {
-        if(ground.childCount == 0)
+        if(ground.childCount == 0 && coin >= towers[index].GetComponent<Tower>().cost)
         {
+                coin = coin - towers[index].GetComponent<Tower>().cost;
               GameObject temp = Instantiate(towers[index]);
                 temp.transform.parent = ground;
                 temp.transform.localPosition = Vector3.zero;
@@ -231,5 +267,10 @@ public class GameManager : MonoBehaviour
         isPause = false;
         Pausebutton.gameObject.SetActive(false);
 
+    }
+
+    public void GetCoin(int _coin)
+    {
+        coin += _coin;
     }
 }

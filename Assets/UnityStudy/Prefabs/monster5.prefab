@@ -118,12 +118,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: []
-  dir: {x: 0, y: 0, z: 0}
-  targetIndex: 0
-  ani: {fileID: 4922601585972474614}
-  speed: 0
-  hp: 40
+  speed: 2.5
+  hp: 45
   maxhp: 0
+  givecoin: 4
   isDead: 0
   sprite: {fileID: 1701214771403547926}
   cr: {fileID: 0}

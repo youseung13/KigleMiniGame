@@ -5,17 +5,20 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public int lap;
+
     public Transform[] target;
 
-    public Vector3 dir;
+    private Vector3 dir;
 
-    public int targetIndex;
+    private int targetIndex;
 
-    public Animator ani;
+    private Animator ani;
 
-    public float speed =0;
+    public float speed ;
     public int hp;
     public int maxhp;
+    public int givecoin;
     public bool isDead = false;
 
     public SpriteRenderer sprite;
@@ -23,6 +26,8 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     private void Awake() {
               cr= GetComponent<CapsuleCollider2D>();
+              ani = GetComponent<Animator>();
+              sprite = GetComponent<SpriteRenderer>();
     }
     void Start()
     {
@@ -33,20 +38,39 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(GameManager.instance.isPause)
-        return;
-        if(isDead)
-        return;
+        if (GameManager.instance.isPause)
+            return;
+        if (isDead)
+            return;
 
+        Move();
 
-        speed = 0;
+        if(lap==3 && targetIndex==2)
+        Gohome();
 
+    }
 
-        if(targetIndex <6)
+    private void Gohome()
+    {
+          
+    this.transform.position = Vector2.MoveTowards(this.transform.position, GameManager.instance.startPos.position, Time.deltaTime * speed * 5);
+     if (Vector2.Distance(this.transform.position, GameManager.instance.startPos.position) < 0.05f)
+    {
+         
+         GameManager.instance.life--;
+         GameManager.instance.count--;
+         Destroy(gameObject);
+    }
+
+    }
+
+    private void Move()
+    {
+        if (targetIndex < 6)
         {
             dir = target[targetIndex].position - this.transform.position;
             dir = dir.normalized * 0.03f;
-            if(dir.x > 0)
+            if (dir.x > 0)
             {
                 sprite.flipX = true;
             }
@@ -55,27 +79,26 @@ public class Enemy : MonoBehaviour
                 sprite.flipX = false;
             }
 
-            speed = dir.magnitude;
+            // speed = dir.magnitude;
 
-        this.transform.position += dir;
+            //  this.transform.position += dir;
+            this.transform.position = Vector2.MoveTowards(this.transform.position, target[targetIndex].position, Time.deltaTime * speed);
 
-       // Debug.LogFormat("Distance : {0}",Vector2.Distance(this.transform.position,target[targetIndex].position));
+            // Debug.LogFormat("Distance : {0}",Vector2.Distance(this.transform.position,target[targetIndex].position));
 
 
-            if(Vector2.Distance(this.transform.position,target[targetIndex].position) < 0.02f)
+            if (Vector2.Distance(this.transform.position, target[targetIndex].position) < 0.02f)
             {
                 targetIndex += 1;
-                if(targetIndex == 6 )
+                if (targetIndex == 6)
                 {
+                    lap ++;  
                     targetIndex = 1;
                 }
             }
         }
-        ani.SetFloat("Speed",speed);
-        
+        ani.SetFloat("Speed", speed);
     }
-
-
 
     public void TakeDamage(int _damage)
    {
@@ -93,6 +116,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        GameManager.instance.GetCoin(givecoin);
         Destroy(gameObject);
         GameManager.instance.aliveenemy.Remove(this.gameObject);
     }
