@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05e72040bed202a4aa954649ee2032ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HPbar: {fileID: 0}
   lap: 0
   target: []
   speed: 2.5
@@ -124,6 +125,7 @@ MonoBehaviour:
   maxhp: 0
   givecoin: 4
   isDead: 0
+  isAlive: 1
   sprite: {fileID: 1701214771403547926}
   cr: {fileID: 0}
 --- !u!70 &5071940873276466703

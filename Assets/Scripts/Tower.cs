@@ -38,28 +38,36 @@ public class Tower : MonoBehaviour
       temp.GetComponent<Missile>().target = target;
     }
 
-    if(target== null)
-    {
-      minDistance = 99999;
-      for (int i = 0; i < gm.enemys.childCount; i++)
-      {
-        if(Vector3.Distance(gm.enemys.GetChild(i).position,transform.position) < minDistance)
+       if (target == null)
         {
-          minDistance = Vector3.Distance(gm.enemys.GetChild(i).position,transform.position);
-          target = gm.enemys.GetChild(i);
+            minDistance = 999999;
+            for (int i = 0; i < gm.enemys.childCount; i++)
+            {
+                if (gm.enemys.GetChild(i).GetComponent<Enemy>().isAlive)
+                {
+                    if (Vector3.Distance(gm.enemys.GetChild(i).position,
+                            this.transform.position) < range)
+                    {
+                        if (Vector3.Distance(gm.enemys.GetChild(i).position,
+                                this.transform.position) < minDistance)
+                        {
+                            minDistance = Vector3.Distance(gm.enemys.GetChild(i).position,
+                                this.transform.position);
+                            target = gm.enemys.GetChild(i);
+                        }
+                    }
+                }
+            }
         }
-      }
+        else
+        {
+            if (Vector3.Distance(target.position,
+                    this.transform.position) > range || !target.GetComponent<Enemy>().isAlive)
+            {
+                target = null;
+            }
+        }
+        //가까이 있는 적을 타겟으로 설정한다
+        //타겟이 사정거리 밖으로 나가면 다시 타겟을 설정한다
     }
-    else
-    {
-        if(Vector3.Distance(target.position,transform.position) > minDistance)
-      {
-        target = null;
-      }
-
-    }
-    
-
-
-  }
 }

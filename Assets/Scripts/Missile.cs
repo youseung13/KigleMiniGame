@@ -12,6 +12,7 @@ public class Missile : MonoBehaviour
    public int damage;
 
    public Vector3 dir;
+   public Vector3 targetPos;
 
    private void Awake() {
       cr= GetComponent<CapsuleCollider2D>();
@@ -20,25 +21,33 @@ public class Missile : MonoBehaviour
 
    void Update()
     {
-      if(target == null || oritarget !=target)
-      {
-         Destroy(gameObject,2f);
-      }
+      if (target != null)
+        {
+            targetPos = target.position;
+        }
+        
+        dir = targetPos - this.transform.position;
+        dir = dir.normalized * speed * Time.deltaTime;
+            
+        this.transform.position += dir;
 
+
+        float angle = Quaternion.FromToRotation
+            (Vector3.right, dir).eulerAngles.z;
+
+        this.transform.rotation = Quaternion.Euler(0,0,
+            angle);
       
-      if(target !=null)
-      {
-         dir = target.position - this.transform.position;
-        dir = dir.normalized * speed *Time.deltaTime;;
-         this.transform.position += dir;
-      }
-
-       
-
-
-
-
-       // Debug.LogFormat("Distance : {0}",Vector2.Distance(this.transform.position,target[targetIndex].position));
+      
+        if (Vector3.Distance(this.transform.position,
+                targetPos) < 0.5f)
+        {
+            if (target != null)
+            {
+                target.GetComponent<Enemy>().TakeDamage(damage);
+            }
+            DestroyImmediate(this.gameObject);
+        }
 
     }
 
@@ -47,7 +56,7 @@ public class Missile : MonoBehaviour
 
     }
 
-
+/*
     private void OnTriggerEnter2D(Collider2D hit) 
     {
       if(hit.GetComponent<Enemy>() != null)
@@ -59,4 +68,5 @@ public class Missile : MonoBehaviour
          }
       }
     }
+*/
 }

@@ -2,10 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    public int lap;
+    [SerializeField]
+    private Slider HPbar;
+    private int lap;
 
     public Transform[] target;
 
@@ -19,10 +22,13 @@ public class Enemy : MonoBehaviour
     public int hp;
     public int maxhp;
     public int givecoin;
-    public bool isDead = false;
+    private bool isDead = false;
+    public bool isAlive = true;
 
-    public SpriteRenderer sprite;
-     public CapsuleCollider2D cr;
+    private SpriteRenderer sprite;
+     private CapsuleCollider2D cr;
+
+     private Coroutine hpBarCoroutine;
     // Start is called before the first frame update
     private void Awake() {
               cr= GetComponent<CapsuleCollider2D>();
@@ -31,6 +37,12 @@ public class Enemy : MonoBehaviour
     }
     void Start()
     {
+        if(HPbar !=null)
+        {
+        HPbar.value = (float)hp/ (float)maxhp;
+        HPbar.gameObject.SetActive(false);
+        }
+       
         targetIndex = 1;
         maxhp = hp;
     }
@@ -38,6 +50,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         if (GameManager.instance.isPause)
             return;
         if (isDead)
@@ -59,6 +72,9 @@ public class Enemy : MonoBehaviour
          
          GameManager.instance.life--;
          GameManager.instance.count--;
+        GameManager.instance.countText.text = string.Format("{0:F0}", GameManager.instance.aliveenemy.Count);
+
+        GameManager.instance.LifeText.text = string.Format("{0:F0}", GameManager.instance.life);
          Destroy(gameObject);
     }
 
@@ -103,6 +119,25 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int _damage)
    {
         hp -= _damage;
+         if(HPbar ==null)
+         return;
+
+
+         if (HPbar.gameObject.activeSelf)
+        {
+            if (hpBarCoroutine != null)
+            {
+                StopCoroutine(hpBarCoroutine);
+            }
+            hpBarCoroutine = StartCoroutine(ShowAndHideHPBar());
+        }
+        else // HP 바가 비활성화된 경우 바로 코루틴 시작
+        {
+            hpBarCoroutine = StartCoroutine(ShowAndHideHPBar());
+        }
+
+        UpdateHPBar();
+       
 
    // GetComponent<Entity>().DamageImpact();
     //fx.StartCoroutine("FlashFX");
@@ -114,10 +149,25 @@ public class Enemy : MonoBehaviour
      }
    }
 
+    private void UpdateHPBar()
+    {
+       HPbar.value = (float)hp/ (float)maxhp;
+    }
+
     private void Die()
     {
+
+       
         GameManager.instance.GetCoin(givecoin);
         Destroy(gameObject);
         GameManager.instance.aliveenemy.Remove(this.gameObject);
+         GameManager.instance.countText.text = string.Format("{0:F0}", GameManager.instance.aliveenemy.Count);
+    }
+
+    IEnumerator ShowAndHideHPBar()
+    {
+        HPbar.gameObject.SetActive(true); // HP 바 활성화
+        yield return new WaitForSeconds(0.8f); // 일정 시간 대기
+        HPbar.gameObject.SetActive(false); // HP 바 비활성화
     }
 }

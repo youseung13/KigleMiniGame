@@ -124,11 +124,16 @@ public class GameManager : MonoBehaviour
     public float timeBetweenSpawn ;
     public bool initspawn = false;
 
+    public float stageTime = 0;
+
+    public float stageTimeMax = 5;
+
 
     public Text CoinText;
     public Text lvText;
     public Text countText;
     public Text LifeText;
+    public Text timeText;
     // Start is called before the first frame update
 
     private void Awake() 
@@ -138,11 +143,21 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        stageTime = stageTimeMax;
         instance = this;
         level = 1;
         nowwave = 0;
         coin = 30;
         life = 5;
+
+        CoinText.text = string.Format("{0:F0}", coin);
+
+        lvText.text = string.Format("lv : {0:F0}", level);
+        
+        countText.text = string.Format("{0:F0}", aliveenemy.Count);
+
+        LifeText.text = string.Format("{0:F0}", life);
+
 
         Debug.Log("data  1 = " + data[0].level + "/" + data[0].MaxEnemy + "/" + data[0].MaxIndex  +"/" + data[0].wave );
         Debug.Log("data  2 = " + data[1].level + "/" + data[1].MaxEnemy + "/" + data[1].MaxIndex  +"/" + data[1].wave );
@@ -178,31 +193,33 @@ public class GameManager : MonoBehaviour
 
 
 
-        if(count == data[level-1].MaxEnemy)
+        if(stageTime < 0 && nowwave < data[level-1].wave )//(count == data[level-1].MaxEnemy)
         {
+            
             nowwave++;
             count = 0;
+            stageTime=stageTimeMax;
             Debug.Log("Next Wave ! Wave is = " + nowwave+"/"+data[level-1].wave);
         }
 
 
         if(nowwave ==data[level-1].wave && aliveenemy.Count == 0)
         {
+            //stageTime = stageTimeMax;
             isPause=true;
             level++;
+            lvText.text = string.Format("lv : {0:F0}", level);
             nowwave = 0;
             Debug.Log("level up ! level is = " + level);
             Pausebutton.gameObject.SetActive(true);
             Time.timeScale=0;
         }
 
-        CoinText.text = string.Format("{0:F0}", coin);
+        if(stageTime >= 0)
+        stageTime -= Time.deltaTime;
 
-        lvText.text = string.Format("lv : {0:F0}", level);
-        
-        countText.text = string.Format("{0:F0}", aliveenemy.Count);
 
-        LifeText.text = string.Format("{0:F0}", life);
+        timeText.text = string.Format("Time : {0:N2}", stageTime);
 
 
    
@@ -215,7 +232,10 @@ public class GameManager : MonoBehaviour
         boss.GetComponent<Enemy>().target = target;
         boss.transform.parent = enemys;
         count ++;
+
+
         aliveenemy.Add(boss);
+        countText.text = string.Format("{0:F0}", aliveenemy.Count);
     }
 
     public void DoSpawn()
@@ -230,6 +250,7 @@ public class GameManager : MonoBehaviour
 
         count++;
         aliveenemy.Add(temp);
+                countText.text = string.Format("{0:F0}", aliveenemy.Count);
        // Debug.Log("Count ! til to max = " + (data[level-1].MaxEnemy - count));
        
 
@@ -248,6 +269,7 @@ public class GameManager : MonoBehaviour
         if(ground.childCount == 0 && coin >= towers[index].GetComponent<Tower>().cost)
         {
                 coin = coin - towers[index].GetComponent<Tower>().cost;
+                CoinText.text = string.Format("{0:F0}", coin);
               GameObject temp = Instantiate(towers[index]);
                 temp.transform.parent = ground;
                 temp.transform.localPosition = Vector3.zero;
@@ -272,5 +294,6 @@ public class GameManager : MonoBehaviour
     public void GetCoin(int _coin)
     {
         coin += _coin;
+        CoinText.text = string.Format("{0:F0}", coin);
     }
 }

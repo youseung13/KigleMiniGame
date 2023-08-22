@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Level 2
   m_EditorClassIdentifier: 
   level: 2
-  wave: 1
-  MaxEnemy: 8
-  MaxIndex: 2
+  wave: 3
+  MaxEnemy: 15
+  MaxIndex: 9

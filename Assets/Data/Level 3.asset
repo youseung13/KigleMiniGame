@@ -15,4 +15,4 @@ MonoBehaviour:
   level: 3
   wave: 1
   MaxEnemy: 10
-  MaxIndex: 3
+  MaxIndex: 19
